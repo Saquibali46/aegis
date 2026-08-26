@@ -95,24 +95,22 @@ React Dashboard
 
 ---
 
-## 🖥️ Dashboard
+## 🖥️ Landing Page
 
 <p align="center">
-  <img src="docs/screenshots/dashboard-ai-incident.png" width="95%" alt="AEGIS Dashboard">
+  <img src="docs/screenshots/Landing-page.png" width="95%" alt="AEGIS Dashboard">
 </p>
 
-The AEGIS dashboard provides a centralized view of:
-
-- Monitored services
-- Open incidents
-- Critical incidents
-- Service health
-- Latency
-- Error rate
-- CPU utilization
-- Memory utilization
-- AI engine status
-- Recently detected incidents
+- 📡 **Service Monitoring** — Monitor multiple application services from a centralized dashboard.
+- 📊 **Live Metrics** — Track latency, error rate, CPU usage, memory usage, and throughput.
+- 🤖 **ML Anomaly Detection** — Automatically identify abnormal service behavior.
+- 🧠 **AI Root-Cause Analysis** — Generate intelligent incident analysis using **Llama 3.2 via Ollama**.
+- 🚨 **Automatic Incident Creation** — Convert detected anomalies into persistent incidents automatically.
+- 🔴 **Dynamic Severity Detection** — Classify incidents as `HIGH` or `CRITICAL` based on operational thresholds.
+- 🎯 **Confidence Scoring** — Calculate incident confidence using multiple abnormal telemetry signals.
+- 🗄️ **Persistent Incident History** — Store services, metrics, incidents, and AI-generated root causes in PostgreSQL.
+- 🛡️ **Graceful AI Fallback** — Keep the monitoring system operational even when the GenAI layer is temporarily unavailable.
+- ☁️ **Hybrid Deployment** — React on Vercel, Spring Boot & FastAPI on Render, with Ollama running locally.
 
 ---
 
