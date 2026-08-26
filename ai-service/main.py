@@ -3,7 +3,9 @@ from pydantic import BaseModel
 from sklearn.ensemble import IsolationForest
 import numpy as np
 import requests
+import os
 
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 app = FastAPI(title="AEGIS AI Service")
 
 
@@ -93,7 +95,7 @@ Keep the response concise and technical.
 """
 
     response = requests.post(
-        "http://localhost:11434/api/generate",
+        f"{OLLAMA_BASE_URL}/api/generate",
         json={
             "model": "llama3.2:3b",
             "prompt": prompt,
