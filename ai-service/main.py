@@ -94,17 +94,30 @@ Give:
 Keep the response concise and technical.
 """
 
-    response = requests.post(
-        f"{OLLAMA_BASE_URL}/api/generate",
-        json={
-            "model": "llama3.2:3b",
-            "prompt": prompt,
-            "stream": False
+    try:
+        response = requests.post(
+            f"{OLLAMA_BASE_URL}/api/generate",
+            json={
+                "model": "llama3.2:3b",
+                "prompt": prompt,
+                "stream": False
+            },
+            timeout=30
+        )
+
+        response.raise_for_status()
+        result = response.json()
+
+        return {
+            "analysis": result["response"],
+            "genAiAvailable": True
         }
-    )
 
-    result = response.json()
-
-    return {
-        "analysis": result["response"]
-    }
+    except requests.RequestException:
+        return {
+            "analysis": (
+                "Anomaly detected successfully. "
+                "GenAI root-cause analysis is currently unavailable."
+            ),
+            "genAiAvailable": False
+        }
