@@ -14,7 +14,7 @@ function Dashboard() {
     const loadDashboardData = async () => {
       try {
         const servicesResponse = await fetch(
-         `${API_BASE_URL}/api/services`
+          `${API_BASE_URL}/api/services`
         );
 
         const incidentsResponse = await fetch(
@@ -22,7 +22,7 @@ function Dashboard() {
         );
 
         const metricsResponse = await fetch(
-          `${API_BASE_URL}/api/metrics/service/2`
+          `${API_BASE_URL}/api/metrics/service/1`
         );
 
 

@@ -22,7 +22,7 @@ function Metrics() {
     const loadMetrics = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/metrics/service/2`
+          `${API_BASE_URL}/api/metrics/service/1`
         );
 
         const data = await response.json();
