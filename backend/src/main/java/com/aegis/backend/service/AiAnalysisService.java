@@ -16,7 +16,10 @@ public class AiAnalysisService {
             @Value("${ai.service.url}") String aiServiceUrl
     ) {
         this.restClient = RestClient.builder()
-                .baseUrl(aiServiceUrl)
+                .baseUrl(System.getenv().getOrDefault(
+        "AI_SERVICE_URL",
+        "http://localhost:8000"
+))
                 .build();
     }
 
