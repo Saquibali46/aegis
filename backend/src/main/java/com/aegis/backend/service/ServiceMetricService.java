@@ -91,9 +91,20 @@ public class ServiceMetricService {
             Incident incident = new Incident();
 
             incident.setTitle("Anomalous behavior detected");
-            incident.setSeverity(IncidentSeverity.HIGH);
-            incident.setStatus(IncidentStatus.OPEN);
-            incident.setRootCause(analysis);
+incident.setStatus(IncidentStatus.OPEN);
+incident.setRootCause(analysis);
+
+boolean critical =
+        savedMetric.getLatency() >= 5000 ||
+        savedMetric.getErrorRate() >= 30 ||
+        savedMetric.getCpuUsage() >= 95 ||
+        savedMetric.getMemoryUsage() >= 95;
+
+incident.setSeverity(
+        critical
+                ? IncidentSeverity.CRITICAL
+                : IncidentSeverity.HIGH
+);
             double confidenceScore = 0.0;
 
             if (savedMetric.getLatency() >= 3000) {
