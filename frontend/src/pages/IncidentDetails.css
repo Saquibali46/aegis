@@ -1,0 +1,459 @@
+/* =========================
+   AEGIS INCIDENT DETAILS
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.incident-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(124, 92, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 10% 60%, rgba(67, 97, 238, 0.06), transparent 35%),
+    #050914;
+
+  color: #f8fafc;
+  padding: 42px 7%;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* BACK BUTTON */
+
+.back-button {
+  background: #0c1323;
+  color: #aeb9cf;
+
+  border: 1px solid #202b40;
+  border-radius: 10px;
+
+  padding: 11px 17px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-bottom: 45px;
+
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  color: white;
+  border-color: #7161ff;
+  background: #111a30;
+  transform: translateX(-2px);
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.incident-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 30px;
+
+  max-width: 1400px;
+  margin: 0 auto 35px;
+}
+
+.eyebrow {
+  display: block;
+
+  color: #8b7cff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 13px;
+}
+
+.incident-heading h1 {
+  font-size: clamp(32px, 4vw, 52px);
+
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+
+  margin: 0 0 15px;
+
+  max-width: 850px;
+}
+
+.incident-heading p {
+  color: #8490a8;
+
+  font-size: 16px;
+
+  margin: 0;
+}
+
+/* SEVERITY BADGE */
+
+.severity-badge {
+  padding: 10px 17px;
+
+  border-radius: 30px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+}
+
+.severity-badge.high {
+  color: #ffb454;
+
+  background: rgba(255, 180, 84, 0.1);
+
+  border: 1px solid rgba(255, 180, 84, 0.25);
+}
+
+.severity-badge.critical {
+  color: #ff6677;
+
+  background: rgba(255, 82, 105, 0.1);
+
+  border: 1px solid rgba(255, 82, 105, 0.25);
+}
+
+.severity-badge.medium {
+  color: #facc15;
+
+  background: rgba(250, 204, 21, 0.1);
+
+  border: 1px solid rgba(250, 204, 21, 0.25);
+}
+
+.severity-badge.low {
+  color: #57e6a5;
+
+  background: rgba(87, 230, 165, 0.1);
+
+  border: 1px solid rgba(87, 230, 165, 0.25);
+}
+
+/* =========================
+   SUMMARY CARDS
+   ========================= */
+
+.incident-grid {
+  max-width: 1400px;
+
+  margin: 0 auto 25px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+}
+
+.detail-card {
+  background: linear-gradient(
+    145deg,
+    rgba(13, 20, 36, 0.96),
+    rgba(8, 14, 27, 0.96)
+  );
+
+  border: 1px solid #202b40;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  transition: all 0.25s ease;
+}
+
+.detail-card:hover {
+  border-color: #3a4266;
+
+  transform: translateY(-2px);
+}
+
+.card-label {
+  display: block;
+
+  color: #7e8ba4;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.3px;
+
+  margin-bottom: 13px;
+}
+
+.detail-card h3 {
+  margin: 0;
+
+  font-size: 21px;
+
+  color: #ffffff;
+}
+
+/* =========================
+   AI ROOT CAUSE CARD
+   ========================= */
+
+.analysis-card {
+  max-width: 1400px;
+
+  margin: 0 auto 25px;
+
+  padding: 32px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124, 92, 255, 0.08),
+      rgba(11, 18, 33, 0.98) 35%
+    );
+
+  border: 1px solid #27304b;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.analysis-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 23px;
+
+  border-bottom: 1px solid #202a3d;
+}
+
+.analysis-header h2 {
+  margin: 0;
+
+  font-size: 25px;
+}
+
+.ai-badge {
+  color: #b8adff;
+
+  background: rgba(124, 92, 255, 0.12);
+
+  border: 1px solid rgba(124, 92, 255, 0.3);
+
+  padding: 8px 13px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* AI TEXT */
+
+.analysis-content {
+  margin-top: 25px;
+
+  color: #c2cad9;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   INCIDENT INFORMATION
+   ========================= */
+
+.metadata-card {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 30px;
+
+  background: #0a1120;
+
+  border: 1px solid #202b40;
+
+  border-radius: 18px;
+}
+
+.metadata-card h2 {
+  margin: 0 0 25px;
+
+  font-size: 21px;
+}
+
+.metadata-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 17px 0;
+
+  border-top: 1px solid #1c2638;
+}
+
+.metadata-row span {
+  color: #7f8ba3;
+
+  font-size: 14px;
+}
+
+.metadata-row strong {
+  color: #e6eaf2;
+
+  font-size: 14px;
+
+  text-align: right;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+  .incident-page {
+    padding: 30px 5%;
+  }
+
+  .incident-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .incident-heading {
+    flex-direction: column;
+  }
+
+  .severity-badge {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 550px) {
+  .incident-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .incident-heading h1 {
+    font-size: 32px;
+  }
+
+  .analysis-card,
+  .metadata-card {
+    padding: 22px;
+  }
+
+  .analysis-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .metadata-row {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  .metadata-row strong {
+    text-align: left;
+  }
+
+/* AI REPORT REFINEMENT */
+
+.analysis-content {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.analysis-content p {
+  margin: 10px 0 18px;
+}
+
+.analysis-content strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.analysis-content ul,
+.analysis-content ol {
+  margin: 14px 0 24px;
+  padding-left: 24px;
+}
+
+.analysis-content li {
+  margin: 10px 0;
+  color: #c3cada;
+}
+
+.analysis-content li::marker {
+  color: #8c7cff;
+}
+
+.analysis-content h1,
+.analysis-content h2,
+.analysis-content h3 {
+  color: #ffffff;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.analysis-content > p:first-child {
+  color: #9a90ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+
+.analysis-content ol li {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: #0d1526;
+  border: 1px solid #1f2a40;
+  border-radius: 10px;
+}
+.resolve-button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(103, 232, 164, 0.25);
+  background: rgba(42, 200, 120, 0.1);
+  color: #67e8a4;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.resolve-button:hover {
+  background: rgba(42, 200, 120, 0.18);
+  transform: translateY(-1px);
+}
+}
