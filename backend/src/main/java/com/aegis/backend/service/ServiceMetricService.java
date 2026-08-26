@@ -76,35 +76,63 @@ public class ServiceMetricService {
     }
     public Object recordAndAnalyzeMetric(Long serviceId, ServiceMetric metric) {
 
-        ServiceMetric savedMetric = recordMetric(serviceId, metric);
+    ServiceMetric savedMetric = recordMetric(serviceId, metric);
 
-        Map aiResult = aiAnalysisService.analyzeMetric(savedMetric);
+    Map aiResult;
 
-        Boolean anomaly = (Boolean) aiResult.get("anomaly");
+    try {
+        aiResult = aiAnalysisService.analyzeMetric(savedMetric);
+    } catch (Exception e) {
+        System.err.println("AI anomaly analysis failed: " + e.getMessage());
 
-        if (Boolean.TRUE.equals(anomaly)) {
+        return Map.of(
+                "anomaly", false,
+                "message", "Metric saved successfully, but AI analysis is temporarily unavailable"
+        );
+    }
 
-            Map rootCauseResult = aiAnalysisService.analyzeRootCause(savedMetric);
+    Boolean anomaly = (Boolean) aiResult.get("anomaly");
 
-            String analysis = (String) rootCauseResult.get("analysis");
+    if (Boolean.TRUE.equals(anomaly)) {
 
+        String analysis =
+                "Anomaly detected. GenAI root-cause analysis is currently unavailable.";
+
+        try {
+            Map rootCauseResult =
+                    aiAnalysisService.analyzeRootCause(savedMetric);
+
+            Object rootCause = rootCauseResult.get("analysis");
+
+            if (rootCause != null) {
+                analysis = rootCause.toString();
+            }
+
+        } catch (Exception e) {
+            System.err.println(
+                    "GenAI root-cause analysis failed: " + e.getMessage()
+            );
+        }
+
+        try {
             Incident incident = new Incident();
 
             incident.setTitle("Anomalous behavior detected");
-incident.setStatus(IncidentStatus.OPEN);
-incident.setRootCause(analysis);
+            incident.setStatus(IncidentStatus.OPEN);
+            incident.setRootCause(analysis);
 
-boolean critical =
-        savedMetric.getLatency() >= 5000 ||
-        savedMetric.getErrorRate() >= 30 ||
-        savedMetric.getCpuUsage() >= 95 ||
-        savedMetric.getMemoryUsage() >= 95;
+            boolean critical =
+                    savedMetric.getLatency() >= 5000 ||
+                    savedMetric.getErrorRate() >= 30 ||
+                    savedMetric.getCpuUsage() >= 95 ||
+                    savedMetric.getMemoryUsage() >= 95;
 
-incident.setSeverity(
-        critical
-                ? IncidentSeverity.CRITICAL
-                : IncidentSeverity.HIGH
-);
+            incident.setSeverity(
+                    critical
+                            ? IncidentSeverity.CRITICAL
+                            : IncidentSeverity.HIGH
+            );
+
             double confidenceScore = 0.0;
 
             if (savedMetric.getLatency() >= 3000) {
@@ -126,8 +154,15 @@ incident.setSeverity(
             incident.setConfidenceScore(confidenceScore);
 
             incidentService.createIncident(serviceId, incident);
-        }
 
-        return aiResult;
+        } catch (Exception e) {
+            System.err.println(
+                    "Incident creation failed for service "
+                            + serviceId + ": " + e.getMessage()
+            );
+        }
     }
+
+    return aiResult;
+}
 }
